@@ -1,6 +1,12 @@
 # FlyAnnoy
 
 
+A simple server around [Annoy](https://github.com/spotify/annoy). You can add, delete and search vectors. 
+
+## Install
+
+
+
 
 ## Python code example
 
