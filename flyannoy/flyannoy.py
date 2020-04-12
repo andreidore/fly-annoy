@@ -13,14 +13,11 @@ from .storage import LocalStorage
 
 class FlyAnnoy(Blueprint):
 
-    def __init__(self, url_prefix="/flyannoy", vector_length=1024, index_pah="temp/index.ann",
-                 reverse_index_path="temp/reverse_index.json", storage=LocalStorage()):
+    def __init__(self, url_prefix="/flyannoy", vector_length=1024, storage=LocalStorage()):
         super().__init__('flyannoy', __name__, url_prefix=url_prefix)
 
         self.vector_length = vector_length
         self.storage = storage
-        self.index_path = index_pah
-        self.reverse_index_path = reverse_index_path
 
         self._load_index()
 
@@ -108,20 +105,28 @@ class FlyAnnoy(Blueprint):
 
         start_time = time.time()
 
-        temp_index = AnnoyIndex(self.vector_length, 'angular')
+        with tempfile.TemporaryDirectory() as temp_folder:
 
-        temp_reverse_index = []
-        i = 0
-        for v, id in self.storage.vector_generator():
-            temp_index.add_item(i, v)
-            temp_reverse_index.append(id)
-            i += 1
+            index_path = os.path.join(temp_folder, "index.ann")
+            reverse_index_path = os.path.join(
+                temp_folder, "reverse_index.json")
 
-        temp_index.build(10)
-        temp_index.save(self.index_path)
+            temp_index = AnnoyIndex(self.vector_length, 'angular')
 
-        with open(self.reverse_index_path, "w") as fp:
-            json.dump(temp_reverse_index, fp, indent=4, sort_keys=True)
+            temp_reverse_index = []
+            i = 0
+            for v, id in self.storage.vector_generator():
+                temp_index.add_item(i, v)
+                temp_reverse_index.append(id)
+                i += 1
+
+            temp_index.build(10)
+            temp_index.save(index_path)
+
+            with open(reverse_index_path, "w") as fp:
+                json.dump(temp_reverse_index, fp, indent=4, sort_keys=True)
+
+            self.storage.save_index(index_path, reverse_index_path)
 
         self._load_index()
 
@@ -143,11 +148,13 @@ class FlyAnnoy(Blueprint):
 
     def _load_index(self):
 
-        if not os.path.exists(self.index_path):
+        index_path, reverse_index_path = self.storage.get_local_index_path()
+
+        if not os.path.exists(index_path):
             return
 
         self.index = AnnoyIndex(self.vector_length, 'angular')
-        self.index.load(self.index_path)
+        self.index.load(index_path)
 
-        with open(self.reverse_index_path) as fp:
+        with open(reverse_index_path) as fp:
             self.reverse_index = json.load(fp)

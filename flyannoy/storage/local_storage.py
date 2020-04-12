@@ -1,6 +1,9 @@
 
 import json
 import os
+import shutil
+
+from annoy import AnnoyIndex
 
 from .storage import Storage
 
@@ -13,6 +16,8 @@ class LocalStorage(Storage):
         self.path = path
         self.vector_path = os.path.join(self.path, "vector")
         self.metadata_path = os.path.join(self.path, "metadata")
+        self.index_path = os.path.join(self.path, "index.ann")
+        self.reverse_index_path = os.path.join(self.path, "reverse_index.json")
 
         os.makedirs(self.metadata_path, exist_ok=True)
         os.makedirs(self.vector_path, exist_ok=True)
@@ -39,3 +44,10 @@ class LocalStorage(Storage):
         for f in files:
             with open(f) as fp:
                 yield json.load(fp), f.split("/")[-1].split(".")[0]
+
+    def save_index(self, index_path: str, reverse_index_path: str):
+        shutil.copyfile(index_path, self.index_path)
+        shutil.copyfile(reverse_index_path, self.reverse_index_path)
+
+    def get_local_index_path(self):
+        return self.index_path, self.reverse_index_path
