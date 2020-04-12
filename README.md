@@ -59,5 +59,16 @@ curl --header "Content-Type: application/json" \
   http://localhost:5000/api/annoy/refresh
 ```
 
+## Storage 
 
+FlyAnnoy support a plugable storage for vectors and index.
+
+### Local Storage
+
+Local storage store the vector in separate files in local file system. 
+Status: In progress
+
+### S3 Storage
+
+Status: In progress
 
