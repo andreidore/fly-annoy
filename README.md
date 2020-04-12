@@ -18,7 +18,6 @@ app.run(debug=True)
 
 ```
 
-## CURL
 
 Add vector
 ```sh
