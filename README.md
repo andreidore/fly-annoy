@@ -43,6 +43,15 @@ curl --header "Content-Type: application/json" \
   http://localhost:5000/api/annoy/delete
 ```
 
+
+Search vector
+```sh
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"vector":[1,2,3]}' \
+  http://localhost:5000/api/annoy/search
+```
+
 Refresh index
 ```
 curl --header "Content-Type: application/json" \
