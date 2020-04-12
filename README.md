@@ -5,7 +5,9 @@ A simple server around [Annoy](https://github.com/spotify/annoy). You can add, d
 
 ## Install
 
-
+```sh
+pip install git+https://github.com/andreidore/flyannoy
+```
 
 
 ## Python code example
