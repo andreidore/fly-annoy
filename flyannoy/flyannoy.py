@@ -66,16 +66,10 @@ class FlyAnnoy(Blueprint):
         r = self.index.get_nns_by_vector(
             vector, 10, include_distances=True)
 
-        print(r)
-
         result = []
         for idx, distance in zip(r[0], r[1]):
             result.append(
                 {"distance": distance, "id": self.reverse_index[idx]})
-
-        print(r)
-
-        #self.storage.save(id, vector, metadata)
 
         end_time = time.time()
         duration = end_time-start_time
