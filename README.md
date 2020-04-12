@@ -6,7 +6,6 @@
 
 ```python
 from flyannoy import FlyAnnoy
-from flyannoy.storage import S3Storage, LocalStorage
 from flask import Flask
 
 
