@@ -29,6 +29,8 @@ class FlyAnnoy(Blueprint):
                           self.delete_vector, methods=["POST"])
         self.add_url_rule("/refresh", "refresh",
                           self.refresh, methods=["POST"])
+        self.add_url_rule("/search", "search",
+                          self.search_vector, methods=["POST"])
 
     def add_vector(self):
 
@@ -52,6 +54,36 @@ class FlyAnnoy(Blueprint):
         duration = end_time-start_time
 
         response_data = {"id": id, "duration": duration}
+        return self._create_response("Ok", 200, response_data)
+
+    def search_vector(self):
+
+        start_time = time.time()
+
+        request_data = request.get_json()
+
+        vector = request_data.get("vector")
+        if vector is None:
+            return _create_response("No vector in request", status_code=400)
+
+        r = self.index.get_nns_by_vector(
+            vector, 10, include_distances=True)
+
+        print(r)
+
+        result = []
+        for idx, distance in zip(r[0], r[1]):
+            result.append(
+                {"distance": distance, "id": self.reverse_index[idx]})
+
+        print(r)
+
+        #self.storage.save(id, vector, metadata)
+
+        end_time = time.time()
+        duration = end_time-start_time
+
+        response_data = {"duration": duration, "result": result}
         return self._create_response("Ok", 200, response_data)
 
     def delete_vector(self):
