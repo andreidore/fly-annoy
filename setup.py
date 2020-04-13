@@ -15,6 +15,8 @@ setuptools.setup(
     install_requires=[
         'flask>=1.1.2',
         'annoy>=1.16.3',
+        "boto3>=1.12.39",
+        "awscli>=1.18.39",
 
     ],
     classifiers=[
