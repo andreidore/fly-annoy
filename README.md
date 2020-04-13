@@ -70,5 +70,18 @@ Local storage store the vector in separate files in local file system.
 
 ### S3 Storage
 
-Status: In progress
+You can store vectors, metadata and index in S3
+
+```python
+from flyannoy import FlyAnnoy,S3Storage
+from flask import Flask
+
+
+flyannoy = FlyAnnoy(url_prefix="/api/annoy", vector_length=3,storage=S3Storage("bucket","key","local_path")
+
+app = Flask(__name__)
+app.register_blueprint(flyannoy)
+
+app.run(debug=True)
+```
 
