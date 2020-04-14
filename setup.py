@@ -11,7 +11,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/andreidore/flyannoy",
-    packages=["flyannoy"],
+    packages=["flyannoy", "flyannoy.storage"],
     install_requires=[
         'flask>=1.1.2',
         'annoy>=1.16.3',

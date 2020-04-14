@@ -26,14 +26,35 @@ app.run(debug=True)
 
 ```
 
+## Methods
 
-Add vector
+### Add vector
+
+Add vector to index. 
+
+Mandatory fields:
+
+* id - id of the vector. Must be an unique string. 
+* vector - list of number
+
+Optional fields:
+
+* metdata - metadata
+
 ```sh
 curl --header "Content-Type: application/json" \
   --request POST \
   --data '{"id":"1","vector":[1.2,3.4,5.6]}' \
   http://localhost:5000/api/annoy/add
 ```
+
+### Delete vector
+
+Delete vector from index. 
+
+Mandatory fields:
+
+* id - id of the vector.
 
 Delete vector
 ```sh
