@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='flyannoy',
-    version='0.1.0',
+    version='0.1.1',
     author="Andrei Dore",
     author_email="andrei.dore@gmail.com",
     description="A simple Annoy server",
