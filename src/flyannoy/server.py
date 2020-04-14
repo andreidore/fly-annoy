@@ -21,8 +21,8 @@ def main():
     parser.add_argument("--s3_bucket", help="S3 bucket")
     parser.add_argument("--s3_key", help="S3 key")
 
-    parser.add_argument("--port", help="Http port", default=5600)
-    parser.add_argument("--path", help="Http path", default="/api/annoy")
+    parser.add_argument("--http_port", help="Http port", default=5600)
+    parser.add_argument("--http_path", help="Http path", default="/api/annoy")
 
     args = parser.parse_args()
 
@@ -33,8 +33,8 @@ def main():
             parser.error(
                 "--s3_bucket and --s3_key is required when storage is s3.")
 
-    print("Http port :", args.port)
-    print("Http path :", args.path)
+    print("Http port :", args.http_port)
+    print("Http path :", args.http_path)
     print("Vector length:", args.length)
     print("Storage :", args.storage)
 
@@ -47,13 +47,13 @@ def main():
     else:
         pass
 
-    flyannoy = FlyAnnoy(url_prefix=args.path, vector_length=args.length,
+    flyannoy = FlyAnnoy(url_prefix=args.http_path, vector_length=args.length,
                         storage=storage)
 
     app = Flask(__name__)
     app.register_blueprint(flyannoy)
 
-    app.run(debug=True, port=args.port)
+    app.run(debug=False, port=args.http_port)
 
 
 if __name__ == "__main__":

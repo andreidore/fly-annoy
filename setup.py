@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='flyannoy',
-    version='0.1.1',
+    version='0.1.2',
     author="Andrei Dore",
     author_email="andrei.dore@gmail.com",
     description="A simple Annoy server",
@@ -19,7 +19,6 @@ setuptools.setup(
         'annoy>=1.16.3',
         "boto3>=1.12.39",
         "awscli>=1.18.39",
-
     ],
     entry_points={
         'console_scripts': [

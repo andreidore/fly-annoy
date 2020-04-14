@@ -9,6 +9,14 @@ A simple server around [Annoy](https://github.com/spotify/annoy) (K-NN). You can
 pip install git+https://github.com/andreidore/flyannoy
 ```
 
+## Command line 
+
+
+Start a server  with s3 storage.
+
+```sh
+flyannoy-server --length 1536 --storage s3 --s3_bucket buckey --s3_key key 
+```
 
 ## Python code example
 
