@@ -1,7 +1,7 @@
 # FlyAnnoy
 
 
-A simple server around [Annoy](https://github.com/spotify/annoy). You can add, delete and search vectors. 
+A simple server around [Annoy](https://github.com/spotify/annoy) (K-NN). You can add, delete and search vectors. 
 
 ## Install
 

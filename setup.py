@@ -12,7 +12,8 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/andreidore/flyannoy",
-    packages=setuptools.find_namespace_packages(include=["flyannoy.*"]),
+    package_dir={"": "src"},
+    packages=setuptools.find_namespace_packages(where="src"),
     install_requires=[
         'flask>=1.1.2',
         'annoy>=1.16.3',
