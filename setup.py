@@ -21,6 +21,12 @@ setuptools.setup(
         "awscli>=1.18.39",
 
     ],
+    entry_points={
+        'console_scripts': [
+            'flyannoy-server=flyannoy.server:main',
+
+        ],
+    },
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: Apache License",
