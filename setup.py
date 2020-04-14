@@ -2,6 +2,7 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+
 setuptools.setup(
     name='flyannoy',
     version='0.1.0',
@@ -11,7 +12,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/andreidore/flyannoy",
-    packages=setuptools.find_packages(),
+    packages=setuptools.find_namespace_packages(include=["flyannoy.*"]),
     install_requires=[
         'flask>=1.1.2',
         'annoy>=1.16.3',
