@@ -90,7 +90,7 @@ curl --header "Content-Type: application/json" \
 
 ## Storage 
 
-FlyAnnoy support a plugable storage for vectors and index.
+FlyAnnoy support pluggable storage for vectors and index.
 
 ### Local Storage
 
